@@ -1,4 +1,4 @@
-from utils import generate_CSP_variables, generate_sudoku_string
+from utils import generate_CSP, generate_sudoku_string, generate_assignment
 from backtracking import recursive_backtracking
 import copy
 
@@ -47,7 +47,8 @@ def arc_consistency(CSP, revise):
 
 
 def solve(grid_string):
-    CSP, assignment = generate_CSP_variables(grid_string)
+    CSP = generate_CSP(grid_string)
+    assignment = generate_assignment(CSP)
 
     is_arc_consistent, new_csp = arc_consistency(CSP, revise_sudoku)
     solution_found, final_assignments = recursive_backtracking(assignment, new_csp)

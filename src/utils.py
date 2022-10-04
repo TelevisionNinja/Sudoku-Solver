@@ -62,7 +62,7 @@ def is_valid_assignment(grid, number, index):
     return True
 
 
-def generate_CSP_variables(sudoku_grid_string):
+def generate_CSP(sudoku_grid_string):
     '''
     variables: cells 0 to 80
     domain: 1 to 9
@@ -84,9 +84,6 @@ def generate_CSP_variables(sudoku_grid_string):
 
     # find the neighbors for each variable
     neighbors = {var: get_neighbors(var) for var in variables}
-
-    # create a dictionary with the values as empty lists
-    assignment = {var: [] for var in variables} 
 
     # create a CSP dictionary
     csp = {
@@ -111,7 +108,20 @@ def generate_CSP_variables(sudoku_grid_string):
             csp.get("domains")[i] = [given_value]
             grid[row][col] = given_value
 
-    return csp, assignment
+    return csp
+
+
+def generate_assignment(CSP):
+    # create a dictionary with the values as empty lists
+    assignment = {var: [] for var in CSP.get("variables")}
+
+    for i in range(81):
+        domain = CSP.get("domains").get(i)
+
+        if len(domain) == 1:
+            assignment.get(i).append(domain[0])
+
+    return assignment
 
 
 def generate_sudoku_string(solution_found, assignment, CSP):
@@ -163,12 +173,9 @@ def convert_assignment_to_grid(assignment, CSP):
 
 
 def is_consistent(value, variable, assignment, CSP):
-    grid = convert_assignment_to_grid(assignment, CSP)
-
-    for key, dict_value in assignment.items():
-        if len(dict_value) != 0:
-            if not is_valid_assignment(grid, value, variable):
-                return False
+    for neightbor in CSP.get("neighbors").get(variable):
+        if value in assignment.get(neightbor):
+            return False
 
     return True
 

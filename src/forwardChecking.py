@@ -1,4 +1,4 @@
-from utils import generate_CSP_variables, generate_sudoku_string
+from utils import generate_CSP, generate_sudoku_string, generate_assignment
 from backtracking import recursive_backtracking
 import copy
 
@@ -18,7 +18,8 @@ def forward_checking(CSP, variable, assignment):
 
 
 def solve(grid_string):
-    CSP, assignment = generate_CSP_variables(grid_string)
+    CSP = generate_CSP(grid_string)
+    assignment = generate_assignment(CSP)
 
     solution_found, final_assignments = recursive_backtracking(assignment, CSP, forward_checking)
 
