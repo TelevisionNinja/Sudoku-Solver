@@ -124,21 +124,15 @@ def generate_assignment(CSP):
     return assignment
 
 
-def generate_sudoku_string(solution_found, assignment, CSP):
+def generate_sudoku_string(assignment, CSP):
     """
     generate a string for the sudoku grid
     """
 
-    if not solution_found:
-        return "No solution found"
-
     grid = ""
 
     for cell in CSP.get("variables"):
-        if len(assignment.get(cell)) == 0:
-            return "No solution found"
-        else:
-            grid += str(assignment.get(cell)[0])
+        grid += str(assignment.get(cell)[0])
 
         if (cell + 1) % 9 == 0:
             if cell != 0 and cell != 80:

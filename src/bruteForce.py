@@ -9,10 +9,13 @@ def generate_assignment(CSP):
     return assignment
 
 
-def solve(grid_string):
+def solve(grid_string, multipleSolutions = False):
     CSP = generate_CSP(grid_string)
     assignment = generate_assignment(CSP)
+    solutions = []
 
-    solution_found, final_assignments = recursive_backtracking(assignment, CSP)
+    recursive_backtracking(assignment, CSP, solutions, multipleSolutions)
 
-    return generate_sudoku_string(solution_found, final_assignments, CSP)
+    for solution in solutions:
+        print(generate_sudoku_string(solution, CSP))
+        print()

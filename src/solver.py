@@ -19,11 +19,39 @@ grid_string = """
 0 0 0 0 8 0 0 7 9
 """
 
+# show single solution
+
+print("single solutions\n")
+
 # very slow
-# print(brute_solve(grid_string) + '\n')
+# print("brute force\n")
+# brute_solve(grid_string)
 
-print(back_solve(grid_string) + '\n')
+print("backtracking\n")
+back_solve(grid_string)
 
-print(forward_solve(grid_string) + '\n')
+print("forward checking\n")
+forward_solve(grid_string)
 
-print(arc_solve(grid_string))
+print("arc consistency\n")
+arc_solve(grid_string)
+
+
+# show multiple solutions
+
+print("\nmultiple solutions\n")
+
+# very slow
+# brute_solve(grid_string, True)
+
+print("-------------------------\nbacktracking\n")
+
+back_solve(grid_string, True)
+
+print("-------------------------\nforward checking\n")
+
+forward_solve(grid_string, True)
+
+print("-------------------------\narc consistency\n")
+
+arc_solve(grid_string, True)

@@ -1,9 +1,14 @@
 from utils import none_inference, is_consistent, is_assignment_complete, get_unassigned_variable, generate_CSP, generate_sudoku_string, generate_assignment
+import copy
 
-
-def recursive_backtracking(assignment, CSP, inference_function = none_inference, is_consistent_function = is_consistent):
+def recursive_backtracking(assignment, CSP, solutions, multipleSolutions = False, inference_function = none_inference, is_consistent_function = is_consistent):
     if is_assignment_complete(assignment):
-        return True, assignment
+        if multipleSolutions:
+            solutions.append(copy.deepcopy(assignment))
+            return False
+
+        solutions.append(assignment)
+        return True
 
     variable = get_unassigned_variable(assignment)
 
@@ -13,22 +18,29 @@ def recursive_backtracking(assignment, CSP, inference_function = none_inference,
             assignment.get(variable).append(value)
 
             inference_state, new_CSP = inference_function(CSP, variable, assignment)
+
             if inference_state: # the inference is successful
-                backtrack_state, new_assignment = recursive_backtracking(assignment, new_CSP, inference_function, is_consistent_function)
-                if backtrack_state:
-                    return True, new_assignment
-                else:
-                    assignment.get(variable).remove(value)
-            else: # the inference fails (a domain became empty)
-                assignment.get(variable).remove(value)
+                backtrack_state = recursive_backtracking(assignment, new_CSP, solutions, multipleSolutions, inference_function, is_consistent_function)
 
-    return False, assignment
+                if backtrack_state and not multipleSolutions:
+                    return True
+
+            # the inference fails (a domain became empty)
+            assignment.get(variable).remove(value)
+
+    return False
 
 
-def solve(grid_string):
+def solve(grid_string, multipleSolutions = False):
     CSP = generate_CSP(grid_string)
     assignment = generate_assignment(CSP)
+    solutions = []
 
-    solution_found, final_assignments = recursive_backtracking(assignment, CSP)
+    recursive_backtracking(assignment, CSP, solutions, multipleSolutions)
 
-    return generate_sudoku_string(solution_found, final_assignments, CSP)
+    if len(solutions) == 0:
+        print("No solution found")
+    else:
+        for solution in solutions:
+            print(generate_sudoku_string(solution, CSP))
+            print()
