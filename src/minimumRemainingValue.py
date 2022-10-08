@@ -1,22 +1,20 @@
-from utils import generate_CSP, generate_sudoku_string, generate_assignment, is_consistent, get_unassigned_variable as get_first_unassigned_variable
+from utils import generate_CSP, generate_sudoku_string, generate_assignment, is_consistent
 from backtracking import recursive_backtracking
 from forwardChecking import forward_checking
 
 
 def get_unassigned_variable(assignment, CSP):
-    minimumDomainSize = 10 # set it to the max domain size
+    minimumDomainSize = 0
     selectedVariable = None
 
     for variable, assigned_value in assignment.items():
         if len(assigned_value) == 0: # check if the variable has been assigned
             domainSize = len(CSP.get("domains").get(variable))
 
-            if domainSize < minimumDomainSize:
+            # check if the minimum domain size has not been set yet or it is greater than the domain
+            if domainSize < minimumDomainSize or minimumDomainSize == 0:
                 minimumDomainSize = domainSize
                 selectedVariable = variable
-
-    if selectedVariable is None:
-        selectedVariable = get_first_unassigned_variable(assignment, CSP)
 
     return selectedVariable
 
