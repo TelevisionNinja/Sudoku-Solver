@@ -187,7 +187,7 @@ def is_assignment_complete(assignment):
     return True
 
 
-def get_unassigned_variable(assignment):
+def get_unassigned_variable(assignment, CSP):
     """
     return a variable that has not been assigned yet
 

@@ -1,7 +1,7 @@
 from utils import none_inference, is_consistent, is_assignment_complete, get_unassigned_variable, generate_CSP, generate_sudoku_string, generate_assignment
 import copy
 
-def recursive_backtracking(assignment, CSP, solutions, multipleSolutions = False, inference_function = none_inference, is_consistent_function = is_consistent):
+def recursive_backtracking(assignment, CSP, solutions, multipleSolutions = False, inference_function = none_inference, is_consistent_function = is_consistent, get_unassigned_variable_function = get_unassigned_variable):
     if is_assignment_complete(assignment):
         if multipleSolutions:
             solutions.append(copy.deepcopy(assignment))
@@ -10,7 +10,7 @@ def recursive_backtracking(assignment, CSP, solutions, multipleSolutions = False
         solutions.append(assignment)
         return True
 
-    variable = get_unassigned_variable(assignment)
+    variable = get_unassigned_variable_function(assignment, CSP)
 
     for value in CSP.get("domains").get(variable):
         if is_consistent_function(value, variable, assignment, CSP):

@@ -2,6 +2,7 @@ from backtracking import solve as back_solve
 from forwardChecking import solve as forward_solve
 from arcConsistency import solve as arc_solve
 from bruteForce import solve as brute_solve
+from minimumRemainingValue import solve as mrv_solve
 
 '''
 Each value is separated by a space
@@ -36,6 +37,9 @@ forward_solve(grid_string)
 print("arc consistency\n")
 arc_solve(grid_string)
 
+print("minimum remaining value\n")
+mrv_solve(grid_string)
+
 
 # show multiple solutions
 
@@ -55,3 +59,6 @@ forward_solve(grid_string, True)
 print("-------------------------\narc consistency\n")
 
 arc_solve(grid_string, True)
+
+print("-------------------------\nminimum remaining value\n")
+mrv_solve(grid_string, True)
