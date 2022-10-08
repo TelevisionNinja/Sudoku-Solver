@@ -4,6 +4,7 @@ from arcConsistency import solve as arc_solve
 from bruteForce import solve as brute_solve
 from minimumRemainingValue import solve as mrv_solve
 from leastConstrainingValue import solve as lcv_solve
+from combinedMethods import solve as combined_solve
 
 '''
 Each value is separated by a space
@@ -44,6 +45,9 @@ mrv_solve(grid_string)
 print("least constraining value\n")
 lcv_solve(grid_string)
 
+print("combined methods\n")
+combined_solve(grid_string)
+
 
 # show multiple solutions
 
@@ -69,3 +73,6 @@ mrv_solve(grid_string, True)
 
 print("-------------------------\nleast constraining value\n")
 lcv_solve(grid_string, True)
+
+print("-------------------------\ncombined methods\n")
+combined_solve(grid_string, True)
