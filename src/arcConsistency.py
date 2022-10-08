@@ -54,6 +54,9 @@ def solve(grid_string, multipleSolutions = False):
     is_arc_consistent, new_csp = arc_consistency(CSP, revise_sudoku)
     recursive_backtracking(assignment, new_csp, solutions, multipleSolutions)
 
-    for solution in solutions:
-        print(generate_sudoku_string(solution, CSP))
-        print()
+    if len(solutions) == 0:
+        print("No solution found")
+    else:
+        for solution in solutions:
+            print(generate_sudoku_string(solution, CSP))
+            print()
