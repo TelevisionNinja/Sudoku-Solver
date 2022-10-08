@@ -1,4 +1,3 @@
-import re
 from utils import none_inference, is_consistent, get_unassigned_variable, generate_CSP, generate_sudoku_string, generate_assignment
 from backtracking import recursive_backtracking
 
