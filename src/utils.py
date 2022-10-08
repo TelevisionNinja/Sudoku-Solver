@@ -206,3 +206,7 @@ def get_unassigned_variable(assignment, CSP):
 
 def none_inference(CSP, variable, assignment):
     return True, CSP
+
+
+def get_domain(variable, CSP):
+    return CSP.get("domains").get(variable)

@@ -3,6 +3,7 @@ from forwardChecking import solve as forward_solve
 from arcConsistency import solve as arc_solve
 from bruteForce import solve as brute_solve
 from minimumRemainingValue import solve as mrv_solve
+from leastConstrainingValue import solve as lcv_solve
 
 '''
 Each value is separated by a space
@@ -40,6 +41,9 @@ arc_solve(grid_string)
 print("minimum remaining value\n")
 mrv_solve(grid_string)
 
+print("least constraining value\n")
+lcv_solve(grid_string)
+
 
 # show multiple solutions
 
@@ -62,3 +66,6 @@ arc_solve(grid_string, True)
 
 print("-------------------------\nminimum remaining value\n")
 mrv_solve(grid_string, True)
+
+print("-------------------------\nleast constraining value\n")
+lcv_solve(grid_string, True)
