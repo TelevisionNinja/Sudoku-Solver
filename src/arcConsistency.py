@@ -26,7 +26,7 @@ def revise_sudoku(CSP, Xi, Xj):
     return revised, new_CSP
 
 
-def arc_consistency(CSP, revise):
+def arc_consistency(CSP, revise = revise_sudoku):
     queue = [(Xi, Xj) for Xi in CSP.get("variables") for Xj in CSP.get("neighbors").get(Xi)]
 
     while len(queue) != 0:
@@ -51,7 +51,7 @@ def solve(grid_string, multipleSolutions = False):
     assignment = generate_assignment(CSP)
     solutions = []
 
-    is_arc_consistent, new_csp = arc_consistency(CSP, revise_sudoku)
+    is_arc_consistent, new_csp = arc_consistency(CSP)
     recursive_backtracking(assignment, new_csp, solutions, multipleSolutions)
 
     if len(solutions) == 0:
