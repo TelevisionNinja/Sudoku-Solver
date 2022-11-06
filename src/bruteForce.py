@@ -1,4 +1,4 @@
-from utils import generate_sudoku_string, generate_CSP
+from utils import generate_CSP
 from backtracking import recursive_backtracking
 
 
@@ -16,9 +16,4 @@ def solve(grid_string, multipleSolutions = False):
 
     recursive_backtracking(assignment, CSP, solutions, multipleSolutions)
 
-    if len(solutions) == 0:
-        print("No solution found")
-    else:
-        for solution in solutions:
-            print(generate_sudoku_string(solution, CSP))
-            print()
+    return solutions, CSP

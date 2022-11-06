@@ -1,4 +1,4 @@
-from utils import none_inference, is_consistent, is_assignment_complete, get_unassigned_variable, generate_CSP, generate_sudoku_string, generate_assignment, get_domain
+from utils import none_inference, is_consistent, is_assignment_complete, get_unassigned_variable, generate_CSP, generate_assignment, get_domain
 import copy
 
 def recursive_backtracking(assignment, CSP, solutions, multipleSolutions = False, inference_function = none_inference, is_consistent_function = is_consistent, get_unassigned_variable_function = get_unassigned_variable, get_domain_function = get_domain):
@@ -39,9 +39,4 @@ def solve(grid_string, multipleSolutions = False):
 
     recursive_backtracking(assignment, CSP, solutions, multipleSolutions)
 
-    if len(solutions) == 0:
-        print("No solution found")
-    else:
-        for solution in solutions:
-            print(generate_sudoku_string(solution, CSP))
-            print()
+    return solutions, CSP
