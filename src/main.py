@@ -1,7 +1,7 @@
-from backtracking import solve as back_solve
+# from backtracking import solve as back_solve
+from backtrackingFast import solve as back_fast_solve
 from forwardChecking import solve as forward_solve
 from arcConsistency import solve as arc_solve
-from bruteForce import solve as brute_solve
 from minimumRemainingValue import solve as mrv_solve
 from leastConstrainingValue import solve as lcv_solve
 from combinedMethods import solve as combined_solve
@@ -39,11 +39,11 @@ def main():
     print("single solutions\n")
 
     # very slow
-    # print("brute force\n")
-    # printSolutions(*brute_solve(grid_string))
+    # print("backtracking\n")
+    # printSolutions(*back_solve(grid_string))
 
-    print("backtracking\n")
-    printSolutions(*back_solve(grid_string))
+    print("backtracking fast\n")
+    printSolutions(*back_fast_solve(grid_string))
 
     print("forward checking\n")
     printSolutions(*forward_solve(grid_string))
@@ -66,12 +66,12 @@ def main():
     print("\nmultiple solutions\n")
 
     # very slow
-    # print("-------------------------\nbrute force\n")
-    # printSolutions(*brute_solve(grid_string, True))
+    # print("-------------------------\nbacktracking\n")
+    # printSolutions(*back_solve(grid_string, True))
 
-    print("-------------------------\nbacktracking\n")
+    print("-------------------------\nbacktracking fast\n")
 
-    printSolutions(*back_solve(grid_string, True))
+    printSolutions(*back_fast_solve(grid_string, True))
 
     print("-------------------------\nforward checking\n")
 

@@ -52,6 +52,8 @@ def solve(grid_string, multipleSolutions = False):
     solutions = []
 
     is_arc_consistent, new_csp = arc_consistency(CSP)
-    recursive_backtracking(assignment, new_csp, solutions, multipleSolutions)
+
+    if (is_arc_consistent):
+        recursive_backtracking(assignment, new_csp, solutions, multipleSolutions)
 
     return solutions, new_csp

@@ -99,14 +99,8 @@ def generate_CSP(sudoku_grid_string):
 
         given_value = grid[row][col]
 
-        if given_value > 0 and given_value < 10:
-            grid[row][col] = 0
-
-            if not is_valid_assignment(grid, given_value, i):
-                raise Exception("Invalid Sudoku Grid")
-
+        if given_value != 0:
             csp.get("domains")[i] = [given_value]
-            grid[row][col] = given_value
 
     return csp
 
@@ -114,12 +108,6 @@ def generate_CSP(sudoku_grid_string):
 def generate_assignment(CSP):
     # create a dictionary with the values as empty lists
     assignment = {var: [] for var in CSP.get("variables")}
-
-    for i in range(81):
-        domain = CSP.get("domains").get(i)
-
-        if len(domain) == 1:
-            assignment.get(i).append(domain[0])
 
     return assignment
 
