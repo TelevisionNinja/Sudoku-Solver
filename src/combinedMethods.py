@@ -1,6 +1,6 @@
 from utils import is_consistent
 from backtracking import recursive_backtracking
-from backtrackingFast import solve as generate_CSP, generate_assignment
+from backtrackingFast import generate_CSP, generate_assignment
 from forwardChecking import forward_checking
 from arcConsistency import arc_consistency
 from minimumRemainingValue import get_unassigned_variable
